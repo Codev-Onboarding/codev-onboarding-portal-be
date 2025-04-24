@@ -7,7 +7,7 @@ export interface INewHire extends Document {
     name: string;
     startDate: Date;
     tasks: ITask[];
-    e201Link:string;
+    e201Link?:string;
     createdAt: Date;
     updatedAt: Date;
   }

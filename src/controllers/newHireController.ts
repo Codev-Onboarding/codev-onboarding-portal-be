@@ -4,6 +4,8 @@ import { NewHireModel } from "../models/newHireModel";
 // Create a new hire
 export const createNewHire = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('createNewHire',req.body);
+    
     const newHire = new NewHireModel(req.body);
     const savedNewHire = await newHire.save();
     res.status(201).json(savedNewHire);
