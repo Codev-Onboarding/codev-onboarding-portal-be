@@ -21,14 +21,14 @@ const router = Router();
 router.post(
 	"/register",
 	verifyToken,
-	authorizeRoles(UserRole.SystemAdmin),
+	authorizeRoles(UserRole.SystemAdmin,UserRole.HR),
 	register
 );
 
 router.post(
 	"/register-new-hire",
-	// verifyToken,
-	// authorizeRoles(UserRole.HR),
+	verifyToken,
+	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
 	registerNewHire,
 	createTasksInRegister,
 	createNewHire
@@ -40,14 +40,14 @@ router.post("/reset-password", verifyEnabled, resetPassword);
 router.post(
 	"/admin-user-create",
 	authenticate,
-	authorizeRoles(UserRole.HR),
+	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
 	adminUserCreate
 );
 
 router.put(
 	"/admin-user-update/:userId",
 	authenticate,
-	authorizeRoles(UserRole.HR),
+	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
 	adminUserUpdate
 );
 

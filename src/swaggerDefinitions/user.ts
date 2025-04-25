@@ -71,8 +71,8 @@
 
 /**
  * @swagger
- * /api/users/{id}/disable:
- *   put:
+ * /api/users/disable/{id}:
+ *   patch:
  *     summary: Disable a user by ID
  *     tags: [Users]
  *     parameters:
