@@ -19,14 +19,14 @@ const router = Router();
 router.post(
 	"/register",
 	verifyToken,
-	authorizeRoles(UserRole.SystemAdmin),
+	authorizeRoles(UserRole.SystemAdmin,UserRole.HR),
 	register
 );
 
 router.post(
 	"/register-new-hire",
-	// verifyToken,
-	// authorizeRoles(UserRole.HR),
+	verifyToken,
+	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
 	registerNewHire,
 	createTasksInRegister,
 	createNewHire
