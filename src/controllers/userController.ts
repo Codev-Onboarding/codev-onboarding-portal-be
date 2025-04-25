@@ -63,7 +63,16 @@ export const getAllUsers = async (
 			.skip((pageNumber - 1) * limitQuery)
 			.limit(limitQuery)
 			.exec();
-		res.json(users);
+
+		const usersTotal = await User.countDocuments(query).exec();
+
+		res.json({
+			users,
+			limit,
+			page,
+			total: usersTotal,
+			length: users?.length || 0,
+		});
 	} catch (err: any) {
 		res.status(500).json({ message: err.message || "Server error" });
 	}
