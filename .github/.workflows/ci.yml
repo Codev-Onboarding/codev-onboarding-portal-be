@@ -18,7 +18,7 @@ jobs:
           npm install
           npm run test
 
-      - name: Deploy to Render
+      - name: Deploy to Render server
         if: github.ref == 'refs/heads/main' && success()
         env:
           deploy_url: ${{ secrets.RENDER_SECRET }}
