@@ -4,8 +4,6 @@ import {
 	login,
 	resetPassword,
 	registerNewHire,
-	adminUserCreate,
-	adminUserUpdate,
 	validateToken,
 } from "../controllers/authController";
 import { UserRole } from "../interfaces/userInterface";
@@ -36,20 +34,6 @@ router.post(
 
 router.post("/login", verifyEnabled, login);
 router.post("/reset-password", verifyEnabled, resetPassword);
-
-router.post(
-	"/admin-user-create",
-	authenticate,
-	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
-	adminUserCreate
-);
-
-router.put(
-	"/admin-user-update/:userId",
-	authenticate,
-	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
-	adminUserUpdate
-);
 
 router.get("/validateToken", authenticate, validateToken);
 
