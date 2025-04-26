@@ -113,7 +113,7 @@ export const adminUserCreate = async (
 			return;
 		}
 
-		await welcomeEmail(result?.user?.email, result?.user?.name);
+		await welcomeEmail(result?.user?.email, result?.user?.name, password);
 		res.status(200).json({ message: "New User Succesfully created" });
 	} catch (err) {
 		const error = err instanceof Error ? err.message : "Unknown error";
