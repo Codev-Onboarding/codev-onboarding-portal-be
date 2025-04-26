@@ -33,14 +33,14 @@ router.patch(
 router.post(
 	"/admin-user-create",
 	authenticate,
-	authorizeRoles(UserRole.HR),
+	authorizeRoles(UserRole.HR, UserRole.SystemAdmin),
 	adminUserCreate
 );
 
 router.put(
 	"/admin-user-update/:userId",
 	authenticate,
-	authorizeRoles(UserRole.HR),
+	authorizeRoles(UserRole.HR, UserRole.SystemAdmin),
 	adminUserUpdate
 );
 
