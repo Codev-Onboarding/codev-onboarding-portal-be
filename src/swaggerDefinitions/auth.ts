@@ -73,7 +73,7 @@
 
 /**
  * @swagger
- * /api/auth/register-new-hire:
+ * /api/auth/register/new-hire:
  *   post:
  *     summary: Create a new hire
  *     tags: [Auth]

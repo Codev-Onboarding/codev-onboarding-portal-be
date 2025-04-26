@@ -3,34 +3,35 @@ import User from "../models/authModel";
 import { NextFunction, Request, Response } from "express";
 
 export const authenticate = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
-	const token = req.headers.authorization;
-	if (!token) {
-		res.status(401).json({ message: "Access Denied" });
-		return;
-	}
+  const token = req.headers.authorization?.split(" ")[1];
+  try {
+    if (!token) {
+      res.status(401).json({ message: "Access Denied" });
+      return;
+    }
 
-	try {
-		const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
-		const userId = decoded._id;
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
 
-		const findUser = await User.findById(userId);
+    const userId = decoded._id;
 
-		if (!findUser) {
-			res.status(403).json({ message: "Invalid Token" });
-			return;
-		}
+    const findUser = await User.findById(userId);
 
-		const user = findUser.toJSON();
-		req.user = user;
-		req.role = user.role;
+    if (!findUser) {
+      res.status(403).json({ message: "Invalid Token1" });
+      return;
+    }
 
-		next();
-	} catch (err) {
-		res.status(403).json({ message: "Invalid Token" });
-		return;
-	}
+    const user = findUser.toJSON();
+    req.user = user;
+    req.role = user.role;
+
+    next();
+  } catch (err) {
+    res.status(403).json({ message: "Invalid Token" });
+    return;
+  }
 };

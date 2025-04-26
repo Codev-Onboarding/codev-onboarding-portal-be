@@ -8,9 +8,8 @@ import {
 } from "../controllers/authController";
 import { UserRole } from "../interfaces/userInterface";
 import { authorizeRoles } from "../middleware/authorizeRoles";
-import { verifyToken } from "../middleware/verifyToken";
-import { verifyEnabled } from "../middleware/verifyEnabled";
 import { authenticate } from "../middleware/authenticate";
+import { verifyEnabled } from "../middleware/verifyEnabled";
 import { createNewHire } from "../controllers/newHireController";
 import { createTasksInRegister } from "../controllers/taskController";
 
@@ -18,14 +17,14 @@ const router = Router();
 
 router.post(
 	"/register",
-	verifyToken,
+	authenticate,
 	authorizeRoles(UserRole.SystemAdmin,UserRole.HR),
 	register
 );
 
 router.post(
-	"/register-new-hire",
-	verifyToken,
+	"/register/new-hire",
+	authenticate,
 	authorizeRoles(UserRole.HR,UserRole.SystemAdmin),
 	registerNewHire,
 	createTasksInRegister,
